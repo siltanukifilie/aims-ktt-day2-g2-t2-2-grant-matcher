@@ -25,7 +25,6 @@ venv/
 htmlcov/
 
 # Project specific
-summaries/
 *.pdf
 *.html
 tenders/
