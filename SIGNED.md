@@ -1,5 +1,3 @@
-markdown# Honor Code — AIMS KTT Fellowship Hackathon 2026
-
 **Full Name:** Sltanu Kifile Alemu  
 **Date:** 23 April 2026  
 **Challenge:** T2.2 · Multilingual Grant & Tender Matcher with Summarizer
