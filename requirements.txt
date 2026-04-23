@@ -1,0 +1,11 @@
+# AIMS KTT Hackathon 2026 - Day 2 - T2.2
+# Install all dependencies with:
+# pip install -r requirements.txt
+
+rank_bm25==0.2.2
+langdetect==1.0.9
+beautifulsoup4==4.12.3
+PyPDF2==3.0.1
+deep-translator==1.11.4
+fpdf==1.7.2
+
