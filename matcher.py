@@ -94,8 +94,12 @@ def parse_tender(filepath):
     region   = extract_field(content, ["region", "région"])
     title    = extract_field(content, ["title", "titre"])
 
+    # Remove language suffix → tender_14_en → tender_14
+    raw_id   = os.path.splitext(os.path.basename(filepath))[0]
+    clean_id = "_".join(raw_id.split("_")[:2])
+
     return {
-        "id":         os.path.splitext(os.path.basename(filepath))[0],
+        "id":         clean_id,
         "filename":   os.path.basename(filepath),
         "content":    content,
         "content_en": content_en,
@@ -143,7 +147,7 @@ def load_tenders(tenders_dir=TENDERS_DIR):
         if filename.endswith((".txt", ".html", ".pdf")):
             filepath = os.path.join(tenders_dir, filename)
             tenders.append(parse_tender(filepath))
-    print(f"📂 Loaded {len(tenders)} tenders")
+    print(f"Loaded {len(tenders)} tenders")
     return tenders
 
 # ── TF-IDF ───────────────────────────────────────────────────────────────────
@@ -338,7 +342,7 @@ def main():
 
     profile = next((p for p in profiles if p["id"] == args.profile), None)
     if not profile:
-        print(f"❌ Profile '{args.profile}' not found.")
+        print(f"Profile '{args.profile}' not found.")
         return
 
     # Load + index tenders
@@ -352,13 +356,13 @@ def main():
     display_results(profile, results)
 
     # Generate + save summaries
-    print("\n📝 Generating summaries...")
+    print("\nGenerating summaries...")
     for rank_num, tender in enumerate(results, 1):
         summary  = generate_summary(profile, tender, rank_num)
         filepath = save_summary(profile, tender, summary, rank_num)
-        print(f"   ✅ Rank {rank_num}: {filepath}")
+        print(f"   Rank {rank_num}: {filepath}")
 
-    print(f"\n✅ Done! Summaries saved in '{SUMMARIES_DIR}/'")
+    print(f"\nDone! Summaries saved in '{SUMMARIES_DIR}/'")
 
 if __name__ == "__main__":
     main()
